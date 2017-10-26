@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<!-- react.js React核心模块 -->
+	<script src="react_tuts\bower_components\react\react.min.js"></script>
+	<!-- react-dom.js 提供与DOM相关的功能 -->
+	<script src="react_tuts\bower_components\react\react-dom.min.js"></script>
+	<!-- browser JSX转化Javascript-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+	    
+	<style>
+		.sstyle{color: pink;font-size: 22px;}
+	</style>
+</head>
+<body>
+<pre style="font-size: 18px;">
+ <h4>React 组件:</h4>
+	1.使用jsx来将代码封装成React组件，然后像插入普通 HTML 标签一样，在其他地方插入这个组件。使用React.createClass用于生成一个组件。
+	2.命名规则：创建的组件类由大写字母开头，并且符合驼峰命名。
+	3.每个组件必须实现自己的render方法，并且输出定义好的模块，返回值null,false,组件模板
+	4.组件类只能包含一个顶层标签
+
+
+ var HelloReact = React.createClass({
+  		render: function(){
+  			return &lt;h1&gt;React&lt;/h1&gt;
+  		}
+  });
+  ReactDOM.render(
+	&lt;HelloReact /&gt;,
+	document.getElementById('container')
+  )
+
+  <h4>组件的样式</h4>
+  设置组件的样式 三种：
+      1、内联样式
+      2、对象样式
+      3、选择器样式
+
+      var hstyle = {
+	  	color: 'red',
+	  	fontSize: 18
+	  }
+	  var HelloReact = React.createClass({
+	  		render: function(){
+	  			{/*return &lt;h1 style={{backgroundColor:"yellow",borderWidth:5}}&gt;Hello&lt;/h1&gt;*/}
+	  			{/*return &lt;h1 style={hstyle}&gt;React&lt;/h1&gt;*/}
+	  			return &lt;h1 className="sstyle"&gt;React&lt;/h1&gt;
+	  		}
+	  });
+	  ReactDOM.render(
+		&lt;HelloReact /&gt;,
+		document.getElementById('container')
+	  )
+	  <h4>复合组件</h4>
+	var hstyle = {
+	  	color: 'red',
+	  	fontSize: 18
+	  }
+	  var HelloR = React.createClass({
+	  		render: function(){
+	  			return &lt;a href="#"&gt;Hello&lt;/a&gt;
+	  		}
+	  });
+	  var ReactH = React.createClass({
+	  		render: function(){
+	  			return &lt;h1 className="sstyle"&gt;React&lt;/h1&gt;
+	  		}
+	  });
+	  var HelloReact = React.createClass({
+	  		render: function(){
+	  			return (&lt;div&gt;
+	  				&lt;HelloR /&gt;
+	  				&lt;ReactH /&gt;
+	  			&lt;/div&gt;)
+	  		}
+	  })
+
+	  ReactDOM.render(
+		&lt;HelloReact /&gt;,
+		document.getElementById('container')
+	  )
+</pre>
+
+	<!-- react渲染的模板内容会插入到这个DOM节点中，作为容器 -->
+	<div id="container"></div>
+
+
+	<!-- 在React开发中，使用JSX，跟javascript不兼容，要设置type='text/babel' -->
+	<!-- babel编译器（将es6 转换为 es5） -->
+	<script type="text/babel">		
+	  var hstyle = {
+	  	color: 'red',
+	  	fontSize: 18
+	  }
+	  var HelloR = React.createClass({
+	  		render: function(){
+	  			return <a href="#">Hello</a>
+	  		}
+	  });
+	  var ReactH = React.createClass({
+	  		render: function(){
+	  			{/*return <h1 style={{backgroundColor:"yellow",borderWidth:5}}>Hello</h1>*/}
+	  			{/*return <h1 style={hstyle}>React</h1>*/}
+	  			return <h1 className="sstyle">React</h1>
+	  		}
+	  });
+	  var HelloReact = React.createClass({
+	  		render: function(){
+	  			return (<div>
+	  				<HelloR />
+	  				<ReactH />
+	  			</div>)
+	  		}
+	  })
+
+	  ReactDOM.render(
+		<HelloReact />,
+		document.getElementById('container')
+	  )
+
+	</script>
+
+</body>
+</html>

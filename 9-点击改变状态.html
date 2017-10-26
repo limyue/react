@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="react_tuts\bower_components\react\react.min.js"></script>
+	   <script src="react_tuts\bower_components\react\react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script type="text/babel">
+        {/* setState(object nextState[, function callback]) */}
+        {/*
+        var Counter = React.createClass({
+        
+            getInitialState : function(){
+              return {clickCount: 0};
+            },
+            handleClick: function () {
+              this.setState(function(state) {
+                return {clickCount: state.clickCount + 1};
+              });
+            },
+            render : function(){
+              return (
+              <h1 onClick={this.handleClick}>点击{this.state.clickCount}次</h1>
+              )
+            }
+
+        });
+        ReactDOM.render(
+          <Counter />,
+          document.getElementById('box')
+        )
+        */}
+
+
+      var Hello = React.createClass({
+
+        getInitialState: function () {
+          return {
+            opacity: 1.0
+          };
+        },
+        componentDidMount: function () {
+          this.timer = setInterval(function () {
+            var opacity = this.state.opacity;
+            opacity -= .05;
+            if (opacity < 0.1) {
+              opacity = 1.0;
+            }
+            this.setState({
+              opacity: opacity
+            });
+          }.bind(this), 100);
+        },
+        render: function () {
+          return (
+            <div style={{opacity: this.state.opacity}}>
+              Hello {this.props.name}
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <Hello name="world"/>,
+        document.getElementById('example')
+      );
+    </script>
+  </body>
+</html>

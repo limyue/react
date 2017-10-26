@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<!-- react.js React核心模块 -->
+	<script src="react_tuts\bower_components\react\react.min.js"></script>
+	<!-- react-dom.js 提供与DOM相关的功能 -->
+	<script src="react_tuts\bower_components\react\react-dom.min.js"></script>
+	<!-- browser JSX转化Javascript-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+	    
+</head>
+<body>
+
+<pre style="font-size: 18px">
+<a href="http://blog.csdn.net/a821814989/article/details/53812609">组件的生命周期</a>
+1、生命周期中与props和state相关：
+  (1)getDefaultProps  用于设置this.props的默认值				（创建组件）  
+  (2)getInitialState  用于设置this.state的默认值				（实例化组件） 
+
+2、Mounting/组件挂载相关：
+  (1) componentWillMount										（挂载组件）
+     组件将要挂载。在render之前执行，但仅执行一次，
+     即使多次重复渲染该组件，或者改变了组件的state
+  (2)componentDidMount 											（完成挂载，读取DOM节点）
+     组件已经挂载，在render之后执行，同一个组件重复渲染只执行一次
+
+3、Updating/组件更新相关：	
+  (1)componentWillReceiveProps(object nextProps)				（组件更新之前）
+     已加载组件收到新的props之前调用，注意组件初始化渲染时则不会执行
+  (2)shouldComponentUpdate(object nextProps,object nextState)	（组件能否更新）
+     组件判断是否重新渲染时调用。该接口实际是在组件接收到了新的props或者新的state的时候会立即调用
+     ，然后通过。如果返回值是false，后三个方法不执行。
+  (3)componentWillUpdate(object nextProps,object nextState)		（组件将要更新）
+     组件将要更新
+  (4)componentDidUpdate(object prevProps,object prevState)		（组件已经更新）
+     组件已经更新
+
+4、Unmounting/组件移除相关：
+  (1)componentWillUnmount 										（组件移除之前）
+     在组件要被移除之前的时间点触发，可以利用该方法来执行一些必要的清理组件将要移除
+
+扩展：移除组件
+	ReactDOM.unmountComponentAtNode()
+</pre>
+
+	<!-- react渲染的模板内容会插入到这个DOM节点中，作为容器 -->
+	<div id="container"></div>
+
+
+	<!-- 在React开发中，使用JSX，跟javascript不兼容，要设置type='text/babel' -->
+	<!-- babel编译器（将es6 转换为 es5） -->
+	<script type="text/babel">		
+	  
+	  var HelloReact = React.createClass({
+	  
+			getDefaultProps:function(){
+				console.log('getDefaultProps')
+		        return {};
+		    },
+		     getInitialState:function(){
+		        console.log("getInitialState");
+		        return null;
+		    },
+		     componentWillMount:function(){
+		        console.log("componentWillMount");
+		    },
+	  		render: function(){
+	  			return <h1>你好世界</h1>
+	  		},
+	  		componentDidMount:function(){
+		        console.log("componentDidMount");
+		    },
+		    componentWillReceiveProps:function(){
+		        console.log("componentWillReceiveProps");
+		    },
+		    shouldComponentUpdate:function(){
+		        console.log("shouldComponentUpdate");
+		        return true;
+		      },
+		    componentWillUpdate:function(){
+		        console.log("componentWillUpdate");
+		    },
+		    componentDidUpdate:function(){
+		        console.log("componentDidUpdate");
+		    },
+			componentWillUnmount:function(){
+		        console.log("componentWillUnmount");
+		    }
+	  })
+
+
+	  ReactDOM.render(
+		<HelloReact />,
+		document.getElementById('container')
+	  )
+	  ReactDOM.render(
+		<HelloReact />,
+		document.getElementById('container')
+	  )
+
+
+	  //ReactDOM.unmountComponentAtNode(document.getElementById("container"));
+	</script>
+
+</body>
+</html>

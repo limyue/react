@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<!-- react.js React核心模块 -->
+	<script src="react_tuts\bower_components\react\react.min.js"></script>
+	<!-- react-dom.js 提供与DOM相关的功能 -->
+	<script src="react_tuts\bower_components\react\react-dom.min.js"></script>
+	<!-- browser JSX转化Javascript-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+	<style>
+		.box{background-color: #ccc;}
+	</style>
+</head>
+<body>
+
+<pre style="font-size: 18px">
+<a href="http://blog.csdn.net/a821814989/article/details/53812364">参考网址props</a>
+<a href="http://blog.csdn.net/a821814989/article/details/53812376">参考网址state</a>
+props：是组件自身的属性。用于嵌套内外层组件中，负责传递信息
+props的对象属性，与组件属性一一对应。
+不要直接修改props的值
+
+<h4>this.props</h4>
+props提供的语法糖，可以将父组件中的全部属性都复制给子组件
+
+<h4>{...this.props}</h4>
+继承全部父属性
+ var HelloReact = React.createClass({
+		render: function(){
+			return (<div {...this.props}>
+				<HelloR hellor={this.props.hello}/>
+				<ReactH reacth={this.props.react}/>
+			</div>)
+		}
+})
+
+ReactDOM.render(
+	<HelloReact className="box" hello='HELLO' react='REACT'/>,
+	document.getElementById('container')
+)
+<hr>
+<h4>this.props.children</h4>
+<h4>属性验证 propTypes </h4> 
+<h4>getDefaultProps</h4>
+<hr>
+</pre>
+
+	<!-- react渲染的模板内容会插入到这个DOM节点中，作为容器 -->
+	<div id="container"></div>
+
+
+	<!-- 在React开发中，使用JSX，跟javascript不兼容，要设置type='text/babel' -->
+	<!-- babel编译器（将es6 转换为 es5） -->
+	<script type="text/babel">		
+	  var hstyle = {
+	  	color: 'red',
+	  	fontSize: 18
+	  }
+	  var HelloR = React.createClass({
+	  		render: function(){
+	  			return <a>{this.props.hellor}</a>
+	  		}
+	  });
+	  var ReactH = React.createClass({
+	  		render: function(){
+	  			return <h1 className="sstyle">{this.props.reacth}</h1>
+	  		}
+	  });
+
+	  var HelloReact = React.createClass({
+	  		render: function(){
+	  			return (<div {...this.props}>
+	  				<HelloR hellor={this.props.hello}/>
+	  				<ReactH reacth={this.props.react}/>
+	  			</div>)
+	  		}
+	  })
+
+	  ReactDOM.render(
+		<HelloReact className="box" hello='HELLO' react='REACT'/>,
+		document.getElementById('container')
+	  )
+	</script>
+
+</body>
+</html>

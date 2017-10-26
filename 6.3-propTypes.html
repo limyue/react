@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<!-- react.js React核心模块 -->
+	<script src="react_tuts\bower_components\react\react.min.js"></script>
+	<!-- react-dom.js 提供与DOM相关的功能 -->
+	<script src="react_tuts\bower_components\react\react-dom.min.js"></script>
+	<!-- browser JSX转化Javascript-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+	<style>
+		.box{background-color: #ccc;}
+	</style>
+</head>
+<body>
+
+<pre style="font-size: 18px">
+<h4>属性验证 propTypes </h4> 
+验证组件属性是否符合要求
+React.PropTypes.string.isRequired 验证是否是字符串
+<hr>
+ var ShowTitel = React.createClass({
+ 	propTypes: {
+ 		titel: React.PropTypes.string.isRequired
+ 	},
+ 	render: function(){
+ 		return &lt;h1&gt;{this.props.titel}&lt;/h1&gt;
+ 	}
+ })
+
+ ReactDOM.render(
+	&lt;ShowTitel titel="123"/&gt;,
+	document.getElementById('container')
+ )
+<hr>
+设置属性默认值 
+getDefaultProps: function(){
+	return {
+		titel: '默认titel'	//titel的默认值
+	}
+}
+
+<hr>
+var ShowTitel = React.createClass({
+ 	getDefaultProps: function(){
+ 		return {
+ 			titel: '默认titel'
+ 		}
+ 	},
+ 	render: function(){
+ 		return &lt;h1&gt;{this.props.titel}&lt;/h1&gt;
+ 	}
+ })
+
+ ReactDOM.render(
+	&lt;ShowTitel/&gt;,
+	document.getElementById('container')
+ )
+ <hr>
+</pre>
+
+	<!-- react渲染的模板内容会插入到这个DOM节点中，作为容器 -->
+	<div id="container"></div>
+
+
+	<!-- 在React开发中，使用JSX，跟javascript不兼容，要设置type='text/babel' -->
+	<!-- babel编译器（将es6 转换为 es5） -->
+	<script type="text/babel">		
+	 var ShowTitel = React.createClass({
+	 	getDefaultProps: function(){
+	 		return {
+	 			titel: '默认titel'
+	 		}
+	 	},
+	 	render: function(){
+	 		return <h1>{this.props.titel}</h1>
+	 	}
+	 })
+
+	 ReactDOM.render(
+		<ShowTitel/>,
+		document.getElementById('container')
+	 )
+
+	</script>
+
+</body>
+</html>
